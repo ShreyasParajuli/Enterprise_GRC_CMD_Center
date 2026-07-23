@@ -2,9 +2,12 @@
 // Sidebar Navigation
 $currentPage = basename($_SERVER['PHP_SELF']);
 $currentDir = basename(dirname($_SERVER['PHP_SELF']));
+$parentDir = basename(dirname(dirname($_SERVER['PHP_SELF'])));
+$isRisks = ($currentDir === 'risks' && $parentDir === 'modules');
 
 $navItems = [
     ['label' => 'Dashboard', 'url' => '/pages/dashboard.php', 'icon' => 'layout-dashboard', 'active' => $currentPage === 'dashboard.php'],
+    ['label' => 'Risk Register', 'url' => '/modules/risks/index.php', 'icon' => 'alert-triangle', 'active' => $isRisks],
     ['label' => 'Users', 'url' => '/pages/users/index.php', 'icon' => 'users', 'active' => $currentDir === 'users'],
     ['label' => 'Roles', 'url' => '/pages/roles/index.php', 'icon' => 'shield', 'active' => $currentDir === 'roles'],
     ['label' => 'Departments', 'url' => '/pages/departments/index.php', 'icon' => 'building', 'active' => $currentDir === 'departments'],
@@ -28,15 +31,23 @@ $navItems = [
             <?php endforeach; ?>
         </nav>
         
+        <nav class="space-y-1 px-3 mt-8">
+            <p class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Administration</p>
+            <a href="<?= BASE_URL ?>/pages/activity_logs.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= $currentPage === 'activity_logs.php' ? 'bg-brand-primary text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="activity" class="mr-3 w-5 h-5 <?= $currentPage === 'activity_logs.php' ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
+                Activity Logs
+            </a>
+            <a href="<?= BASE_URL ?>/pages/settings.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= $currentPage === 'settings.php' ? 'bg-brand-primary text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="settings" class="mr-3 w-5 h-5 <?= $currentPage === 'settings.php' ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
+                Settings
+            </a>
+        </nav>
+
         <!-- Placeholder for future modules -->
         <nav class="space-y-1 px-3 mt-8">
             <p class="px-3 text-xs font-semibold text-brand-dark/70 uppercase tracking-wider mb-2">GRC Modules (Soon)</p>
             <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-brand-dark/70 cursor-not-allowed">
-                <i class="fa-solid fa-book-open mr-3 text-lg text-brand-dark"></i>
-                Risk Register
-            </a>
-            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-brand-dark/70 cursor-not-allowed">
-                <i class="fa-solid fa-list-check mr-3 text-lg text-brand-dark"></i>
+                <i data-lucide="list-check" class="mr-3 w-5 h-5 text-brand-dark"></i>
                 Audits
             </a>
         </nav>

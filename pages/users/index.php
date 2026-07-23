@@ -82,14 +82,19 @@ $users = $stmt->fetchAll();
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="<?= BASE_URL ?>/pages/users/edit.php?id=<?= $user['id'] ?>" class="text-brand-primary hover:opacity-80 mr-3">Edit</a>
-                                        <a href="<?= BASE_URL ?>/pages/users/delete.php?id=<?= $user['id'] ?>" class="text-brand-dark/70 hover:text-brand-dark/70" onclick="return confirm('Are you sure?')">Delete</a>
+                                        <a href="<?= BASE_URL ?>/pages/users/delete.php?id=<?= $user['id'] ?>" class="text-brand-dark/70 hover:text-brand-dark/70" onclick="event.preventDefault(); let url=this.href; confirmAction('Are you sure?', () => window.location.href=url)">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                            <?php if (count($users) === 0): ?>
+                            <?php if (empty($users)): ?>
                                 <tr>
-                                    <td colspan="5" class="px-6 py-8 text-center text-brand-dark/70">
-                                        No users found.
+                                    <td colspan="5" class="px-6 py-12 text-center text-brand-dark/50 bg-white">
+                                        <i data-lucide="users" class="w-12 h-12 mx-auto mb-3 text-brand-dark/20"></i>
+                                        <p class="text-base font-semibold">No users found.</p>
+                                        <p class="text-sm mt-1">Get started by creating a new user.</p>
+                                        <a href="<?= BASE_URL ?>/pages/users/create.php" class="inline-flex items-center mt-4 bg-brand-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                                            <i data-lucide="plus" class="w-4 h-4 mr-2"></i> Add First User
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endif; ?>

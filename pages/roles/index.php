@@ -14,7 +14,7 @@ $roles = $stmt->fetchAll();
 <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
     <?php require_once __DIR__ . '/../../includes/navbar.php'; ?>
 
-    <main class="flex-1 overflow-y-auto p-6">
+    <main class="flex-1 overflow-y-auto p-6 bg-[#FFFAF3]">
         <div class="max-w-7xl mx-auto space-y-6">
             
             <div class="flex justify-between items-center">
@@ -50,10 +50,22 @@ $roles = $stmt->fetchAll();
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="<?= BASE_URL ?>/pages/roles/edit.php?id=<?= $role['id'] ?>" class="text-brand-primary hover:opacity-80 mr-3">Edit</a>
-                                        <a href="<?= BASE_URL ?>/pages/roles/delete.php?id=<?= $role['id'] ?>" class="text-brand-dark/70 hover:text-brand-dark/70" onclick="return confirm('Are you sure you want to delete this role?')">Delete</a>
+                                        <a href="<?= BASE_URL ?>/pages/roles/delete.php?id=<?= $role['id'] ?>" class="text-brand-dark/70 hover:text-brand-dark/70" onclick="event.preventDefault(); let url=this.href; confirmAction('Are you sure you want to delete this role?', () => window.location.href=url)">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php if (empty($roles)): ?>
+                                <tr>
+                                    <td colspan="4" class="px-6 py-12 text-center text-brand-dark/50 bg-white">
+                                        <i data-lucide="shield" class="w-12 h-12 mx-auto mb-3 text-brand-dark/20"></i>
+                                        <p class="text-base font-semibold">No roles found.</p>
+                                        <p class="text-sm mt-1">Get started by creating a new role.</p>
+                                        <a href="<?= BASE_URL ?>/pages/roles/create.php" class="inline-flex items-center mt-4 bg-brand-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
+                                            <i data-lucide="plus" class="w-4 h-4 mr-2"></i> Add First Role
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

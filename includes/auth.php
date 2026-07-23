@@ -16,13 +16,17 @@ function requireLogin() {
     }
 }
 
-// Check if user has a specific role (or one of an array of roles)
 function hasRole($roles) {
     if (!isLoggedIn() || !isset($_SESSION['user_role'])) {
         return false;
     }
     
     $userRole = $_SESSION['user_role'];
+    
+    // Super User override: Admin has access to everything
+    if ($userRole === 'Admin' || (isset($_SESSION['username']) && $_SESSION['username'] === 'admin')) {
+        return true;
+    }
     
     if (is_array($roles)) {
         return in_array($userRole, $roles);
@@ -36,9 +40,7 @@ function requireRole($roles) {
     requireLogin(); // Must be logged in first
     
     if (!hasRole($roles)) {
-        // Log unauthorized access attempt (optional but recommended)
-        header('HTTP/1.1 403 Forbidden');
-        echo "403 Forbidden - You do not have permission to access this resource.";
+        header("Location: " . BASE_URL . "/pages/errors/403.php");
         exit;
     }
 }
@@ -68,7 +70,7 @@ function loginUser($pdo, $username, $password) {
         $_SESSION['user_role'] = $user['role_name'] ?? 'User';
         
         // Log activity
-        logActivity($pdo, $user['id'], "User Logged In");
+        logActivity($pdo, $user['id'], "[Auth] User Logged In");
         
         return true;
     }
@@ -79,7 +81,7 @@ function loginUser($pdo, $username, $password) {
 // Logout user
 function logoutUser($pdo = null) {
     if (isset($_SESSION['user_id']) && $pdo) {
-        logActivity($pdo, $_SESSION['user_id'], "User Logged Out");
+        logActivity($pdo, $_SESSION['user_id'], "[Auth] User Logged Out");
     }
     
     // Unset all session variables

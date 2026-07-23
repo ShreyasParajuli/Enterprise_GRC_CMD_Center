@@ -37,11 +37,6 @@
 </head>
 <body class="bg-brand-bg text-brand-dark font-sans antialiased min-h-screen flex flex-col">
 
-<?php if (isset($_SESSION["success_msg"])): ?>
-    <div class="bg-brand-success text-brand-dark px-4 py-3 text-center text-sm font-medium">
-        <?= htmlspecialchars($_SESSION["success_msg"]) ?>
-    </div>
-    <?php unset($_SESSION["success_msg"]); ?>
-<?php endif; ?>
+
 
 <div class="flex flex-1 overflow-hidden">

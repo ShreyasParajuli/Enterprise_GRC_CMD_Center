@@ -32,6 +32,18 @@ $navItems = [
         </nav>
         
         <nav class="space-y-1 px-3 mt-8">
+            <p class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Asset Management</p>
+            <a href="<?= BASE_URL ?>/modules/assets/index.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= ($currentPage === 'index.php' && $currentDir === 'assets') ? 'bg-brand-primary text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="server" class="mr-3 w-5 h-5 <?= ($currentPage === 'index.php' && $currentDir === 'assets') ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
+                Asset Register
+            </a>
+            <a href="<?= BASE_URL ?>/modules/assets/categories.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= ($currentPage === 'categories.php' && $currentDir === 'assets') ? 'bg-brand-primary text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="tags" class="mr-3 w-5 h-5 <?= ($currentPage === 'categories.php' && $currentDir === 'assets') ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
+                Asset Categories
+            </a>
+        </nav>
+        
+        <nav class="space-y-1 px-3 mt-8">
             <p class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Administration</p>
             <a href="<?= BASE_URL ?>/pages/activity_logs.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= $currentPage === 'activity_logs.php' ? 'bg-brand-primary text-white' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
                 <i data-lucide="activity" class="mr-3 w-5 h-5 <?= $currentPage === 'activity_logs.php' ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
@@ -43,11 +55,18 @@ $navItems = [
             </a>
         </nav>
 
-        <!-- Placeholder for future modules -->
         <nav class="space-y-1 px-3 mt-8">
-            <p class="px-3 text-xs font-semibold text-brand-dark/70 uppercase tracking-wider mb-2">GRC Modules (Soon)</p>
-            <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-brand-dark/70 cursor-not-allowed">
-                <i data-lucide="list-check" class="mr-3 w-5 h-5 text-brand-dark"></i>
+            <p class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">GRC Automation</p>
+            <a href="<?= BASE_URL ?>/modules/workflows/index.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= ($currentDir === 'workflows') ? 'bg-brand-primary text-white shadow-md shadow-[#EF6351]/30' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="git-merge" class="mr-3 w-5 h-5 <?= ($currentDir === 'workflows') ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
+                Workflow Engine
+            </a>
+        </nav>
+
+        <nav class="space-y-1 px-3 mt-8">
+            <p class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Audit & Assurance</p>
+            <a href="<?= BASE_URL ?>/modules/audits/index.php" class="group flex items-center px-3 py-2 text-sm font-medium rounded-md <?= ($currentDir === 'audits') ? 'bg-brand-primary text-white shadow-md shadow-[#EF6351]/30' : 'text-white/70 hover:bg-white/10 hover:text-white' ?>">
+                <i data-lucide="list-check" class="mr-3 w-5 h-5 <?= ($currentDir === 'audits') ? 'text-white' : 'text-white/50 group-hover:text-white' ?>"></i>
                 Audits
             </a>
         </nav>
